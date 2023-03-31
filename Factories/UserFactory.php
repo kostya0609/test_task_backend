@@ -30,13 +30,19 @@ class UserFactory extends Factory
             ];
         });
     }
+//тут можно сохранять или через Хук или с помощью функции save()
 
-    public function configure(){
-        return $this->afterMaking(function (User $user) {
-            $user->save();
-        })->afterCreating(function (User $user) {
-            //
-        });
+//    public function configure(){
+//        return $this->afterMaking(function (User $user) {
+//            $user->save();
+//        })->afterCreating(function (User $user) {
+//            //
+//        });
+//    }
+
+    public function save(){
+        return function (User $user) {
+            $user->save();};
     }
 
     public function definition(){

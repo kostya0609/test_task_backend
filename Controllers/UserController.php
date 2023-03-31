@@ -37,6 +37,7 @@ class UserController extends Controller {
         DB::beginTransaction();
         try{
             $user = User::factory()->suspended($request)->state(['notes' => 'Для примера заменим на свое примечание'])->make();
+            $user->save(); //если использовать Хук у Фабрики, то эта строка не нужна
             DB::commit();
             return response()->json(['status' => 'success', 'user_id' => $user->id]);
         }catch (\Exception $e){
